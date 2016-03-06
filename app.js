@@ -1,5 +1,5 @@
 
-d3.csv("population.csv", function(err, data) {
+d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(err, data) {
     var width = 960,
         height = 960;
 
