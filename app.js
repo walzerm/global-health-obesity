@@ -3,6 +3,43 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
     var width = 960,
         height = 960;
 
+    var dataValues = {};
+
+    // calculates the gender difference in obesity/overweight trends
+    data.forEach(function(d) {
+        if (!dataValues[d.location_name]) {
+            dataValues[d.location_name] = {};
+        }
+        if (!dataValues[d.location_name][d.year]) {
+            dataValues[d.location_name][d.year] = {};
+        }
+
+        var locationYear = dataValues[d.location_name][d.year];
+        if (d.age_group_id === "9") {
+            if (d.sex === "male") {
+                if (d.metric === "obese") {
+                    locationYear.male_obesity = d.mean * 100;
+                } else {
+                    locationYear.male_overweight = d.mean * 100;
+                }
+            }
+            if (d.sex === "female") {
+                if (d.metric === "obese") {
+                    locationYear.female_obesity = d.mean * 100;
+                } else {
+                    locationYear.female_overweight = d.mean * 100;
+                }
+            }
+        }
+
+        if (locationYear.male_obesity && locationYear.male_overweight && locationYear.female_obesity && locationYear.female_overweight) {
+            var delta = (locationYear.male_obesity + locationYear.male_overweight) - (locationYear.female_obesity + locationYear.female_overweight);
+            locationYear.delta = delta;
+        }
+    })
+
+    console.log(dataValues);
+
     var projection = d3.geo.mercator()
         .scale((width + 1) / 2 / Math.PI)
         .translate([width / 2, height / 2])
