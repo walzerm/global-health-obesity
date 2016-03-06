@@ -33,12 +33,16 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
         }
 
         if (locationYear.male_obesity && locationYear.male_overweight && locationYear.female_obesity && locationYear.female_overweight) {
-            var delta = (locationYear.male_obesity + locationYear.male_overweight) - (locationYear.female_obesity + locationYear.female_overweight);
+            var delta = Math.round(locationYear.male_obesity + locationYear.male_overweight) - (locationYear.female_obesity + locationYear.female_overweight);
             locationYear.delta = delta;
         }
     })
 
     console.log(dataValues);
+
+    var color = d3.scale.threshold()
+    .domain([-23, -22, -21 -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23])
+    .range(['#ff00ff','#ff2bff','#ff3fff','#ff4fff','#ff5cff','#ff68ff','#ff72ff','#ff7cff','#ff86ff','#ff8fff','#ff98ff','#ffa1ff','#ffa9ff','#ffb2ff','#ffbaff','#ffc2ff','#ffcaff','#ffd1ff','#ffd9ff','#ffe1ff','#ffe8ff','#fff0ff','#fff8ff','#ffffff','#f9f5ff','#f3eaff','#ede0ff','#e7d6ff','#e1ccff','#dac2ff','#d4b8ff','#cdaeff','#c6a4ff','#be9aff','#b790ff','#af86ff','#a77cff','#9e72ff','#9568ff','#8b5eff','#8154ff','#764aff','#693fff','#5b33ff','#4a27ff','#3418ff','#0000ff']);
 
     var projection = d3.geo.mercator()
         .scale((width + 1) / 2 / Math.PI)
@@ -81,7 +85,16 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
         .attr("d", path)
         .attr("id", function(d,i) { return d.id; })
         .attr("title", function(d) { return d.properties.name; })
-        .style("fill", "grey")
+        .style("fill", function(d) {
+            // console.log(d.properties.name);
+            if (!dataValues[d.properties.name]) {
+                console.log(d.properties.name);
+                return "grey"
+            }
+            var temp = dataValues[d.properties.name][1990];
+            // console.log(temp.delta);
+            return color(temp.delta);
+        })
         .on("mousemove", function(d) {
             var html = "";
 
