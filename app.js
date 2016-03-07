@@ -61,15 +61,16 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
     svg.append("path")
         .datum(graticule)
         .attr("class", "graticule")
+        .attr("class", "choropleth")
         .attr("d", path);
 
     d3.json("/world-topo-min.json", function(error, world) {
         var countries = topojson.feature(world, world.objects.countries).features;
 
-        svg.append("path")
-        .datum(graticule)
-        .attr("class", "choropleth")
-        .attr("d", path);
+        // svg.append("path")
+        // .datum(graticule)
+        // .attr("class", "choropleth")
+        // .attr("d", path);
 
         var g = svg.append("g");
 
@@ -97,13 +98,20 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
         })
         .on("mousemove", function(d) {
             var html = "";
+            var temp = dataValues[d.properties.name][1990];
 
             html += "<div class=\"tooltip_kv\">";
             html += "<span class=\"tooltip_key\">";
             html += d.properties.name;
             html += "</span>";
             html += "<span class=\"tooltip_value\">";
-            // html += (valueHash[d.properties.name] ? valueFormat(valueHash[d.properties.name]) : "");
+            html += "Male obesity rate: " + parseFloat(temp.male_obesity).toFixed(2) + "%";
+            html += "<br>";
+            html += "Female obesity rate: " + parseFloat(temp.female_obesity).toFixed(2) + "%";
+            html += "<br>";
+            html += "Male overweight rate: " + parseFloat(temp.male_overweight).toFixed(2) + "%";
+            html += "<br>";
+            html += "Female overweight rate: " + parseFloat(temp.female_overweight).toFixed(2) + "%";
             html += "";
             html += "</span>";
             html += "</div>";

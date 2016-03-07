@@ -10,10 +10,12 @@ body {
 }
 .land {
   fill: #222;
+  stroke: grey;
+
 }
 .boundary {
   fill: none;
-  stroke: #fff;
+  stroke: grey;
   stroke-width: 1px;
 }
 #tooltip-container {
@@ -30,4 +32,8 @@ body {
 .tooltip_value {
   margin-left: 20px;
   float: right;
+}
+.land_borders {
+	stroke: grey;
+	stroke-width: 2px;
 }
