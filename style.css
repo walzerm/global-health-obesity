@@ -1,4 +1,4 @@
-body {
+html, body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 960px;
   height: 500px;
@@ -25,6 +25,7 @@ body {
   padding: 10px;
   border: 1px solid;
   display: none;
+  border-radius: 5px;
 }
 .tooltip_key {
   font-weight: bold;
@@ -36,6 +37,10 @@ body {
 .land_borders {
 	stroke: grey;
 	stroke-width: 2px;
+}
+
+.country {
+    stroke: grey;
 }
 
 .d3-slider {

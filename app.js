@@ -1,6 +1,6 @@
 d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(err, data) {
-    var width = 960,
-        height = 960;
+    var width = 860,
+        height = 860;
 
     var dataValues = {};
     var year = 1990;
@@ -102,11 +102,13 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
             html += "<div class=\"tooltip_kv\">";
             html += "<span class=\"tooltip_key\">";
             html += d.properties.name;
+            html += "<br>";
+            html += year;
             html += "</span>";
             html += "<span class=\"tooltip_value\">";
             html += "Male obesity rate: " + parseFloat(temp.male_obesity).toFixed(2) + "%";
             html += "<br>";
-            html += year + " Female obesity rate: " + parseFloat(temp.female_obesity).toFixed(2) + "%";
+            html += "Female obesity rate: " + parseFloat(temp.female_obesity).toFixed(2) + "%";
             html += "<br>";
             html += "Male overweight rate: " + parseFloat(temp.male_overweight).toFixed(2) + "%";
             html += "<br>";
@@ -145,7 +147,7 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
         .attr("d", path);
 
         d3.select("#slider3").call(d3.slider().axis(true).min(1990).max(2013).on("slide", function(evt, value) {
-            d3.select("#slider3text").text(year);
+            d3.select("#slider3text").text(value);
             year = value;
             country.style("fill", function(d) {
                 // console.log(d.properties.name);
