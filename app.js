@@ -1,10 +1,9 @@
-
 d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(err, data) {
     var width = 960,
         height = 960;
 
     var dataValues = {};
-
+    var year = 1990;
     // calculates the gender difference in obesity/overweight trends
     data.forEach(function(d) {
         if (!dataValues[d.location_name]) {
@@ -92,13 +91,13 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
                 console.log(d.properties.name);
                 return "grey"
             }
-            var temp = dataValues[d.properties.name][1990];
+            var temp = dataValues[d.properties.name][year];
             // console.log(temp.delta);
             return color(temp.delta);
         })
         .on("mousemove", function(d) {
             var html = "";
-            var temp = dataValues[d.properties.name][1990];
+            var temp = dataValues[d.properties.name][year];
 
             html += "<div class=\"tooltip_kv\">";
             html += "<span class=\"tooltip_key\">";
@@ -107,7 +106,7 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
             html += "<span class=\"tooltip_value\">";
             html += "Male obesity rate: " + parseFloat(temp.male_obesity).toFixed(2) + "%";
             html += "<br>";
-            html += "Female obesity rate: " + parseFloat(temp.female_obesity).toFixed(2) + "%";
+            html += year + " Female obesity rate: " + parseFloat(temp.female_obesity).toFixed(2) + "%";
             html += "<br>";
             html += "Male overweight rate: " + parseFloat(temp.male_overweight).toFixed(2) + "%";
             html += "<br>";
@@ -144,7 +143,25 @@ d3.csv("IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(er
         .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
         .attr("class", "boundary")
         .attr("d", path);
+
+        d3.select("#slider3").call(d3.slider().axis(true).min(1990).max(2013).on("slide", function(evt, value) {
+            d3.select("#slider3text").text(year);
+            year = value;
+            country.style("fill", function(d) {
+                // console.log(d.properties.name);
+                if (!dataValues[d.properties.name]) {
+                    console.log(d.properties.name);
+                    return "grey"
+                }
+                var temp = dataValues[d.properties.name][year];
+                // console.log(temp.delta);
+                return color(temp.delta);
+            })
+        }))
     });
 
     d3.select(self.frameElement).style("height", height + "px");
+
+
+
 });
