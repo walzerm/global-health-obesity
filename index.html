@@ -9,21 +9,26 @@
         <script src="http://thematicmapping.org/playground/d3/d3.slider/d3.slider.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <script type="text/javascript" src="app.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="js/app.js"></script>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div class="container-fluid">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <h2>Year <span id="slider3text">1990</span></h2>
+            <div class="col-md-11">
+                <h3>A Comparison of Obesity and Overweight Prevalence Between Genders, Age 20-24</h3>
+                <h4>Year: <span id="slider3text">1990</span></h4>
 
                 <div id="slider3" class="d3-slider d3-slider-horizontal">
                 </div>
                 <div id="tooltip-container"></div>
                 <div id="canvas-svg"></div>
 
-            <div class="col-md-1"></div>
+
+            <div class="col-md-1">
+                <div id="key">
+                    <img src="img/map_key.png" alt="map key" />
+                </div>
+            </div>
         </div>
 
     </body>
