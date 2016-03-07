@@ -1,6 +1,6 @@
 //world map template from https://vida.io/gists/oaYRaR8EwvpEnXBbM
 
-d3.csv("data/IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", function(err, data) {
+d3.csv("data/data.csv", function(err, data) {
     var width = 860,
         height = 860;
 
@@ -16,7 +16,7 @@ d3.csv("data/IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", functi
         }
 
         var locationYear = dataValues[d.location_name][d.year];
-        if (d.age_group_id === "9") {
+        // if (d.age_group_id === "9") {
             if (d.sex === "male") {
                 if (d.metric === "obese") {
                     locationYear.male_obesity = d.mean * 100;
@@ -31,7 +31,7 @@ d3.csv("data/IHME_GBD_2013_OBESITY_PREVALENCE_1990_2013_Y2014M10D08.csv", functi
                     locationYear.female_overweight = d.mean * 100;
                 }
             }
-        }
+        // }
 
         if (locationYear.male_obesity && locationYear.male_overweight && locationYear.female_obesity && locationYear.female_overweight) {
             var delta = Math.round(locationYear.male_obesity + locationYear.male_overweight) - (locationYear.female_obesity + locationYear.female_overweight);
