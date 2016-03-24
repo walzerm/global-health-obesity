@@ -1,0 +1,24 @@
+{
+  "name": "global-health-obesity",
+  "version": "1.0.0",
+  "description": "This is a D3.js world map which compares the prevalence of obesity and overweight populations between genders in the 20-24 years old age group. Each county is color coded according to the difference in mean prevalence. If the rates are equal between men and women, the country is depicted as white. A higher prevalence of male overweight/obesity rates is shown as blue, and conversely fuchsia for higher female rates.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walzerm/global-health-obesity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/walzerm/global-health-obesity/issues"
+  },
+  "homepage": "https://github.com/walzerm/global-health-obesity#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "knex": "^0.10.0",
+    "pg": "^4.5.1"
+  }
+}
