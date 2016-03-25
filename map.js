@@ -12,8 +12,14 @@ router.get('/datareq', function(req, res, next) {
     })
 })
 
-router.get('/dataupdate', function(req, res, next) {
-    knex('obesity_data').where('age_group_id', 34).then(function(data) {
+router.get('/dataupdate/:ageID', function(req, res, next) {
+    var ages = req.params.ageID.split("_");
+    var intAges = [];
+    for (var i = 0; i < ages.length; i++) {
+        intAges.push(parseInt(ages[i]));
+    };
+    console.log(intAges);
+    knex('obesity_data').whereIn('age_group_id', intAges).then(function(data) {
         res.send(data);
     })
 })

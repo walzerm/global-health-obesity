@@ -169,7 +169,11 @@ d3.json("/datareq", function(err, data) {
 
 //updates the data based on a new age group
 function updateGraph() {
-    d3.json("/dataupdate", function(err, data) {
+
+    var ageId = document.getElementById("age-group").value;
+    console.log(ageId);
+
+    d3.json("/dataupdate/" + ageId, function(err, data) {
         data.forEach(function(d) {
             var locationYear = dataValues[d.location_name][d.year];
                 if (d.sex === "male") {
