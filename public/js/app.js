@@ -1,7 +1,7 @@
 //world map template from https://vida.io/gists/oaYRaR8EwvpEnXBbM
 
 //loads the obesity/overweight data
-d3.csv("data/data.csv", function(err, data) {
+d3.json("/datareq", function(err, data) {
     var width = 860,
         height = 860;
 
