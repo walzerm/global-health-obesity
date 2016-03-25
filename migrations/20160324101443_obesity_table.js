@@ -2,6 +2,7 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('obesity_data', function(table) {
         table.increments();
+        table.integer('location_id');
         table.string('location');
         table.string('location_name');
         table.integer('year');
@@ -21,5 +22,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable('obesitydata');
+    return knex.schema.dropTable('obesity_data');
 };
