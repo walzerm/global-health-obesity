@@ -25,10 +25,20 @@
 
 
             <div class="col-md-1">
+                <!-- <input type="button" name="name" value="Change" onchange="updateGraph()"> -->
+                <select id="age-group" onchange="updateGraph()">
+                    <option value="34,6">2 to 9</option>
+                    <option value="7,8">10 to 19</option>
+                    <option value="9,10,11">20 to 34</option>
+                    <option value="12,13,14">35 to 49</option>
+                    <option value="15,16,17">50 to 64</option>
+                    <option value="18,19,20">65 to 79</option>
+                    <option value="21">80+</option>
+                </select>
                 <div id="key">
                     <img src="img/map_key.png" alt="map key" />
                 </div>
-                <input type="button" name="name" value="Change" onclick="updateGraph()">
+
             </div>
         </div>
 

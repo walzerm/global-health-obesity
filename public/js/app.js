@@ -18,8 +18,6 @@ d3.json("/datareq", function(err, data) {
     var width = 860,
         height = 860;
 
-
-
     // calculates the gender difference in obesity/overweight trends and saves it in an object
     data.forEach(function(d) {
         if (!dataValues[d.location_name]) {
@@ -169,12 +167,10 @@ d3.json("/datareq", function(err, data) {
     d3.select(self.frameElement).style("height", height + "px");
 });
 
+//updates the data based on a new age group
 function updateGraph() {
     d3.json("/dataupdate", function(err, data) {
-        console.log('here');
         data.forEach(function(d) {
-
-
             var locationYear = dataValues[d.location_name][d.year];
                 if (d.sex === "male") {
                     if (d.metric === "obese") {
@@ -204,18 +200,5 @@ function updateGraph() {
             var temp = dataValues[d.properties.name][year];
             return color(temp.delta);
         })
-        // var svg = d3.select("#canvas-svg").transition();
-        // // console.log(svg);
-        // var country = svg.select(".country");
-        // console.log(country);
-        // svg.select(".country")
-        //     .style("fill", function(d) {
-        //         //changes the color of a country based on year
-        //         if (!dataValues[d.properties.name]) {
-        //             return "grey"
-        //         }
-        //         var temp = dataValues[d.properties.name][year];
-        //         return color(temp.delta);
-        //     })
     })
 }
