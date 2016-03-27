@@ -30,26 +30,37 @@ d3.json("/datareq", function(err, data) {
         var locationYear = dataValues[d.location_name][d.year];
             if (d.sex === "male") {
                 if (d.metric === "obese") {
-                    locationYear.male_obesity = d.mean * 100;
+                    if (!locationYear.male_obesity) {
+                        locationYear.male_obesity = [];
+                    }
+                    locationYear.male_obesity.push(d.mean * 100);
                 } else {
-                    locationYear.male_overweight = d.mean * 100;
+                    if (!locationYear.male_overweight) {
+                        locationYear.male_overweight = [];
+                    }
+                    locationYear.male_overweight.push(d.mean * 100);
                 }
             }
             if (d.sex === "female") {
                 if (d.metric === "obese") {
-                    locationYear.female_obesity = d.mean * 100;
+                    if (!locationYear.female_obesity) {
+                        locationYear.female_obesity = [];
+                    }
+                    locationYear.female_obesity.push(d.mean * 100);
                 } else {
-                    locationYear.female_overweight = d.mean * 100;
+                    if (!locationYear.female_overweight) {
+                        locationYear.female_overweight = [];
+                    }
+                    locationYear.female_overweight.push(d.mean * 100);
                 }
             }
-        // }
 
         if (locationYear.male_obesity && locationYear.male_overweight && locationYear.female_obesity && locationYear.female_overweight) {
-            var delta = Math.round(locationYear.male_obesity + locationYear.male_overweight) - (locationYear.female_obesity + locationYear.female_overweight);
+            var delta = Math.round(locationYear.male_obesity[0] + locationYear.male_overweight[0]) - (locationYear.female_obesity[0] + locationYear.female_overweight[0]);
             locationYear.delta = delta;
         }
     })
-
+console.log(dataValues);
     //Sets up the D3 map
     var projection = d3.geo.mercator()
         .scale((width + 1) / 2 / Math.PI)
